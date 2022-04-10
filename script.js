@@ -1,7 +1,5 @@
 console.log("Hello");
 
-
-
 function computerPlay() {
     const options = ["rock", "paper", "scissors"];
     return options[Math.floor(Math.random() * options.length)];
@@ -27,7 +25,10 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = "rock";
-const computerSelection = computerPlay();
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    for (let i = 0; i < 5; i++) {
+        console.log(playRound(window.prompt("Please enter your selection"), computerPlay()));
+     }
+}
+
+game()
