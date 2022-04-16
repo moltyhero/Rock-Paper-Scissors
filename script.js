@@ -34,12 +34,27 @@ function playRound(playerSelection, computerSelection)
 
 function game()
 {
-    for (let i = 0; i < 5; i++)
-    {
-        console.log(
-            playRound(window.prompt("Please enter your selection"), computerPlay())
-        );
-    }
+    // for (let i = 0; i < 5; i++)
+    // {
+    //     console.log(
+    //         playRound(window.prompt("Please enter your selection"), computerPlay())
+    //     );
+    // }
+
 }
 
-game();
+//game();
+
+const rockBtn = document.getElementById("Rock");
+const paperBtn = document.getElementById("Paper");
+const scissorsB = document.getElementById("Scissors");
+
+const buttons = document.querySelectorAll('button');
+console.log(buttons);
+
+buttons.forEach((button) => {
+    console.log(button.textContent);
+    button.addEventListener('click', () => {
+        console.log(playRound(button.id, computerPlay()));
+    })
+})
