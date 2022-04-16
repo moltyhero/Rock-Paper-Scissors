@@ -9,26 +9,26 @@ function computerPlay()
 function playRound(playerSelection, computerSelection)
 {
     playerSelection = playerSelection.toLowerCase();
-    if (playerSelection == computerSelection) return "It is a tie!";
+    if (playerSelection == computerSelection) return 0;
     else if (playerSelection == "rock")
     {
-        if (computerSelection == "paper") return "You lose! Paper beats Rock";
+        if (computerSelection == "paper") return -1;
         else if (computerSelection == "scissors")
-            return "You win! Rock beats Scissors";
+            return 1;
     } 
     else if (playerSelection == "paper")
     {
         // Player selection is Paper
         if (computerSelection == "scissors")
-            return "You lose! Scissors beats Paper";
-        else if (computerSelection == "rock") return "You win! Paper beats Rock";
+            return -1;
+        else if (computerSelection == "rock") return 1;
     } 
     else if (playerSelection == "scissors")
     {
         // Player selection is Scissors
-        if (computerSelection == "rock") return "You lose! Rock beats Scissors";
+        if (computerSelection == "rock") return -1;
         else if (computerSelection == "paper")
-            return "You win! Scissors beats Paper";
+            return 1;
     }
 }
 
@@ -45,16 +45,29 @@ function game()
 
 //game();
 
-const rockBtn = document.getElementById("Rock");
-const paperBtn = document.getElementById("Paper");
-const scissorsB = document.getElementById("Scissors");
+// const rockBtn = document.getElementById("Rock");
+// const paperBtn = document.getElementById("Paper");
+// const scissorsB = document.getElementById("Scissors");
+const resultDiv = document.getElementById("Results");
+const winnerDiv = document.getElementById("Winner");
 
 const buttons = document.querySelectorAll('button');
-console.log(buttons);
+
+let playerScore = 0;
+let computerScore = 0;
 
 buttons.forEach((button) => {
-    console.log(button.textContent);
     button.addEventListener('click', () => {
-        console.log(playRound(button.id, computerPlay()));
+        let currentScore = playRound(button.id, computerPlay())
+        if (currentScore > 0)
+            playerScore++;
+        else
+            computerScore++;
+        resultDiv.innerText = `Your Score: ${playerScore}, Computer Score: ${computerScore}`;
+
+        if (playerScore === 5)
+            winnerDiv.innerText = "You are the winner!";
+        else if (computerScore === 5)
+            winnerDiv.innerText = "You lost!";
     })
 })
